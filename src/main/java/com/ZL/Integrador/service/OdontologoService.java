@@ -17,7 +17,7 @@ public class OdontologoService {
     }
     public List<Odontologo> listar(){return odontologoRepository.findAll();}
 
-    public Odontologo modificar(Odontologo odontologo){return odontologoRepository.save(odontologo);}
+    public void modificar(Odontologo odontologo){odontologoRepository.save(odontologo);}
 
     public void eliminar(int id){odontologoRepository.deleteById(id);}
 

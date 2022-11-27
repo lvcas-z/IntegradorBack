@@ -13,11 +13,12 @@ import java.time.LocalDate;
 @Table(name = "Pacientes")
 public class Paciente {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private  String nombre;
     private  String apellido;
+    private String domicilio;
     private  String dni;
     private LocalDate fechaAlta;
 }

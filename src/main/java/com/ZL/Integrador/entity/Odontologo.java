@@ -6,7 +6,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-@ToString
 @Entity
 @Getter
 @Setter
@@ -14,6 +13,7 @@ import javax.persistence.*;
 public class Odontologo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
     private  String nombre;
