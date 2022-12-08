@@ -1,25 +1,33 @@
 package com.ZL.Integrador.service;
 
 import com.ZL.Integrador.entity.Odontologo;
+import com.ZL.Integrador.exception.ExistException;
+import com.ZL.Integrador.exception.NotFoundException;
 import com.ZL.Integrador.repository.OdontologoRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class OdontologoService {
     private OdontologoRepository odontologoRepository;
-    public void agregar(Odontologo odontologo){
+    public void agregar(Odontologo odontologo) throws ExistException {
+        if (odontologoRepository.exists(Example.of(odontologo))) throw new ExistException("El odontologo ya existe");
         odontologoRepository.save(odontologo);
     }
     public List<Odontologo> listar(){return odontologoRepository.findAll();}
 
     public void modificar(Odontologo odontologo){odontologoRepository.save(odontologo);}
 
-    public void eliminar(int id){odontologoRepository.deleteById(id);}
+    public void eliminar(int id) throws NotFoundException {
+        if (buscar(id) ==null) throw new NotFoundException("El odontologo a eliminar no existe");
+        odontologoRepository.deleteById(id);
+    }
 
-    public Optional<Odontologo> getByMatricula(int id){return odontologoRepository.findById(id);}
+    public Odontologo buscar(Integer id) throws NotFoundException {
+        return odontologoRepository.findById(id).orElseThrow(() -> new NotFoundException("Odontologo no encontrado"));
+    }
 }
