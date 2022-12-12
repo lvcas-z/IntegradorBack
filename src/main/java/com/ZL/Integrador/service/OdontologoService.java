@@ -20,7 +20,10 @@ public class OdontologoService {
     }
     public List<Odontologo> listar(){return odontologoRepository.findAll();}
 
-    public void modificar(Odontologo odontologo){odontologoRepository.save(odontologo);}
+    public void modificar(String matricula,Integer id) throws NotFoundException {
+        if(buscar(id) == null) throw new NotFoundException("El odontologo a modificar es inexistente");
+        odontologoRepository.modificar(matricula, id);
+        ;}
 
     public void eliminar(int id) throws NotFoundException {
         if (buscar(id) ==null) throw new NotFoundException("El odontologo a eliminar no existe");

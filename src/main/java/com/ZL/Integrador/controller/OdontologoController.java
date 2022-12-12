@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -29,9 +30,10 @@ public class OdontologoController {
             odontologoService.agregar(odontologo);
             return new ResponseEntity<>("Se creo exitosamente", HttpStatus.CREATED);
     }
-    @PutMapping("/actualizarOdontologo")
-    public ResponseEntity<String>actualizar(@RequestBody Odontologo odontologo){
-        odontologoService.modificar(odontologo);
+    @Transactional
+    @PutMapping("/actualizarOdontologo/{matricula}/{id}")
+    public ResponseEntity<String>actualizar(@PathVariable String matricula, @PathVariable Integer id) throws NotFoundException{
+        odontologoService.modificar(matricula,id);
         return new ResponseEntity<>("Se actualizo el odontologo",HttpStatus.OK);
     }
     @GetMapping("/buscar/{id}")

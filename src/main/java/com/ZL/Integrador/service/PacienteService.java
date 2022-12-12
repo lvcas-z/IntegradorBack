@@ -21,13 +21,16 @@ public class PacienteService {
     }
     public List<Paciente> listar(){return pacienteRepository.findAll();}
 
-    public void modificar(Paciente paciente){pacienteRepository.save(paciente);}
+    public void modificar(String domicilio, Integer id)throws NotFoundException {
+        if(buscar(id) == null) throw new NotFoundException("El paciente a eliminar es inexistente");
+        pacienteRepository.modificar(domicilio, id);
+    }
 
     public Paciente buscar(Integer id) throws NotFoundException {
         return pacienteRepository.findById(id).orElseThrow(() -> new NotFoundException("Paciente no encontrado"));
     }
     public void eliminar(int id) throws NotFoundException {
-        if(buscar(id) == null) throw new NotFoundException("El odontologo a eliminar no existe");
+        if(buscar(id) == null) throw new NotFoundException("El paciente a eliminar no existe");
         pacienteRepository.deleteById(id);
     }
 

@@ -26,9 +26,9 @@ public class PacienteController {
         pacienteService.agregar(paciente);
         return new ResponseEntity<>("Se creo el paciente exitosamente", HttpStatus.CREATED);
     }
-    @PutMapping("/actualizarPaciente")
-    public ResponseEntity<String>actualizar(@RequestBody Paciente paciente){
-        pacienteService.modificar(paciente);
+    @PutMapping("/actualizarPaciente/{domicilio}/{id}")
+    public ResponseEntity<String>actualizar(@PathVariable String domicilio, @PathVariable Integer id) throws NotFoundException {
+        pacienteService.modificar(domicilio,id);
         return new ResponseEntity<>("Se actualizo el paciente",HttpStatus.OK);
     }
     @GetMapping("/buscar/{id}")

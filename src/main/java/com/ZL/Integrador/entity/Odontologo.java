@@ -3,16 +3,14 @@ package com.ZL.Integrador.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
 @Getter
 @Setter
-@Table(name = "Odontologos")
+@Entity
 public class Odontologo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
